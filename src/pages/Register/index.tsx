@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppButton from '../../components/Button';
+import PasswordInput from '../../components/PasswordInput';
 
 export default function Register() {
   const [active, setMode] = useState(true);
@@ -28,7 +29,7 @@ export default function Register() {
               <p className="font-bold">Cadastro</p>
             </div>
           </div>
-          <form className="p-8 flex flex-col">
+          <form className="pt-5 pr-8 pb-8 pl-8 flex flex-col">
             <label htmlFor="mail" className="text-xs pt-8">
               Nome
             </label>
@@ -48,10 +49,7 @@ export default function Register() {
             <label htmlFor="" className="text-xs pt-4">
               Senha
             </label>
-            <input
-              type="password"
-              className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
-            />
+            <PasswordInput />
             <AppButton onClick={toogleButton}>
               {active ? (
                 <span>Criar Cadastro</span>
