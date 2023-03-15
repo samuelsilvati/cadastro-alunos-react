@@ -2,13 +2,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
 
 function Login() {
   const [active, setMode] = useState(true);
-  const toogleButton = () => {
+  const toogleButton = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     setMode(!active);
+    toast.success('Wow so easy!');
   };
 
   return (

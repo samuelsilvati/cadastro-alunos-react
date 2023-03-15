@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Header from './components/Header';
 import Account from './pages/Account';
 import Home from './pages/Home';
@@ -32,6 +33,7 @@ export function WrappedApp() {
     <BrowserRouter>
       <Header />
       <App />
+      <ToastContainer />
     </BrowserRouter>
   );
 }
