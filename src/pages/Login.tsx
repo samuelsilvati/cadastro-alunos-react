@@ -1,11 +1,12 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
+import axios from '../services/axios';
 
 function Login() {
   const [active, setMode] = useState(true);
@@ -14,6 +15,14 @@ function Login() {
     setMode(!active);
     toast.success('Wow so easy!');
   };
+
+  React.useEffect(() => {
+    async function getData() {
+      const response = await axios.get('/alunos');
+      console.log(response);
+    }
+    getData();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
