@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AppButton from '../../components/Button';
-import PasswordInput from '../../components/PasswordInput';
+import AppButton from '../components/Button';
+import PasswordInput from '../components/PasswordInput';
 
 export default function Register() {
   const [active, setMode] = useState(true);
@@ -19,7 +19,7 @@ export default function Register() {
 
         <div className="w-[360px] h-[560px] bg-zinc-100 rounded">
           <div className="flex">
-            <Link to="/">
+            <Link to="/login">
               <div className="flex items-center justify-center w-[180px] h-20 bg-zinc-300 rounded-tl border-r border-b border-zinc-400">
                 <p className="font-bold">Fazer Login</p>
               </div>
@@ -30,12 +30,12 @@ export default function Register() {
             </div>
           </div>
           <form className="pt-5 pr-8 pb-8 pl-8 flex flex-col">
-            <label htmlFor="mail" className="text-xs pt-8">
+            <label htmlFor="name" className="text-xs pt-8">
               Nome
             </label>
             <input
-              type="mail"
-              id="mail"
+              type="text"
+              id="name"
               className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
             />
             <label htmlFor="mail" className="text-xs pt-4">
