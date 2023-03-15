@@ -26,7 +26,7 @@ function Header() {
           <ul className="flex gap-4">
             <li>
               <Link
-                to="/"
+                to="/account"
                 className="flex justify-center p-1 hover:text-gray-200 transition ease-in-out duration-150"
               >
                 CONTA
@@ -35,7 +35,7 @@ function Header() {
             </li>
             <li>
               <Link
-                to="/"
+                to="/exit"
                 className="flex justify-center p-1 hover:text-gray-200 transition ease-in-out duration-150"
               >
                 SAIR
