@@ -10,7 +10,8 @@ type Props = React.DetailedHTMLProps<
 
 function PasswordInput(props: Props) {
   const [showPassword, setShowPassword] = useState(true);
-  const handleClickShowPassword = () => {
+  const handleClickShowPassword = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     setShowPassword(!showPassword);
   };
   return (
