@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
-import axios from '../services/axios';
 
 function Login() {
   const [active, setMode] = useState(true);
@@ -15,14 +14,6 @@ function Login() {
     setMode(!active);
     toast.success('Wow so easy!');
   };
-
-  React.useEffect(() => {
-    async function getData() {
-      const response = await axios.get('/alunos');
-      console.log(response);
-    }
-    getData();
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
@@ -55,18 +46,6 @@ function Login() {
             <label htmlFor="" className="text-xs pt-4">
               Senha
             </label>
-            {/* <div className="w-auto flex items-center justify-end pt-[5px]">
-                <input
-                  type={!active ? 'text' : 'password'}
-                  className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0 absolute w-[296px]"
-                />
-                <button
-                  onClick={toogleButton}
-                  className="text-gray-400 relative pr-2"
-                >
-                  {active ? <Eye size={24} /> : <EyeSlash size={24} />}
-                </button>
-              </div> */}
             <PasswordInput />
             <AppButton onClick={toogleButton}>
               {active ? (
