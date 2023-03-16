@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducers from './rootReducers';
+import botaoSlice from './slice';
 
 const store = configureStore({
-  reducer: rootReducers,
+  reducer: botaoSlice,
 });
 
 export default store;
