@@ -19,13 +19,9 @@ const botaoSlice = createSlice({
     },
     botaoClicadoFailure: (state) => {
       console.log('FAILURE');
-      // eslint-disable-next-line no-param-reassign
-      state.botaoClicado = !state.botaoClicado;
     },
     botaoClicadoRequest: (state) => {
       console.log('REQUEST');
-      // eslint-disable-next-line no-param-reassign
-      state.botaoClicado = !state.botaoClicado;
     },
   },
 });
