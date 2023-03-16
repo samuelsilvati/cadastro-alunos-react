@@ -1,11 +1,50 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import isEmail from 'validator/lib/isEmail';
+import { get } from 'lodash';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
+import axios from '../services/axios';
 
 export default function Register() {
   const [active, setMode] = useState(true);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSubmit(e: { preventDefault: () => void }) {
+    e.preventDefault();
+    let formErr = false;
+
+    if (name.length < 3 || name.length > 255) {
+      formErr = true;
+      toast.error('O Nome deve ter mais de 3 caracteres');
+    }
+
+    if (!isEmail(email)) {
+      formErr = true;
+      toast.error('E-mail-inválido');
+    }
+
+    if (password.length < 6 || password.length > 12) {
+      formErr = true;
+      toast.error('A senha deve ter entre de 6 e 12');
+    }
+
+    if (formErr) return;
+
+    try {
+      const nome = name;
+      await axios.post('/users', { nome, password, email });
+      toast.success('Cadastro Criado!');
+    } catch (err) {
+      const errors = get(err, 'response.data.errors', []);
+      errors.map((error) => toast.error(error));
+    }
+  }
+
   const toogleButton = () => {
     setMode(!active);
   };
@@ -29,7 +68,10 @@ export default function Register() {
               <p className="font-bold">Cadastro</p>
             </div>
           </div>
-          <form className="pt-5 pr-8 pb-8 pl-8 flex flex-col">
+          <form
+            className="pt-5 pr-8 pb-8 pl-8 flex flex-col"
+            onSubmit={handleSubmit}
+          >
             <label htmlFor="name" className="text-xs pt-8">
               Nome
             </label>
@@ -37,6 +79,8 @@ export default function Register() {
               type="text"
               id="name"
               className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="mail" className="text-xs pt-4">
               Endereço de e-mail
@@ -45,12 +89,18 @@ export default function Register() {
               type="mail"
               id="mail"
               className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="" className="text-xs pt-4">
               Senha
             </label>
-            <PasswordInput />
-            <AppButton onClick={toogleButton}>
+            <PasswordInput
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <AppButton onClick={toogleButton} type="submit">
               {active ? (
                 <span>Criar Cadastro</span>
               ) : (

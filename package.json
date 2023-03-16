@@ -21,7 +21,8 @@
     "react-toastify": "^9.1.1",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
-    "redux-saga": "^1.2.2"
+    "redux-saga": "^1.2.2",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -30,6 +31,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
+    "@types/validator": "^13.7.14",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "@vitejs/plugin-react": "^2.0.1",
