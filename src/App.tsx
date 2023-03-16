@@ -6,18 +6,26 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
+import Students from './pages/Students';
 import PrivateRoute from './routes/PrivateRoute';
 
 export function App() {
-  const isLoggedIn = true;
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route
+        path="students"
+        element={
+          <PrivateRoute isLoggedIn>
+            <Students />
+          </PrivateRoute>
+        }
+      />
+      <Route
         path="register"
         element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
+          <PrivateRoute isLoggedIn>
             <Register />
           </PrivateRoute>
         }
