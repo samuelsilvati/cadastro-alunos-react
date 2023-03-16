@@ -3,7 +3,7 @@ import { SignOut, User } from '@phosphor-icons/react';
 
 function Header() {
   return (
-    <header className="absolute flex items-center justify-center w-full bg-zinc-400 z-30 border-b border-zinc-400">
+    <header className="fixed flex items-center justify-center w-full bg-zinc-400 z-30 border-b border-zinc-400">
       <div className="max-w-6xl pl-4 pr-4 grow flex items-center justify-between">
         <a
           href="https://github.com/samuelsilvati"
