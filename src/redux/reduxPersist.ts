@@ -5,9 +5,8 @@ import { Reducer, Action } from 'redux';
 export default (reducers: Reducer<any, Action<any>>) => {
   const persistedReducer = persistReducer(
     {
-      key: 'CADASTRO-DE-ALUNOS-APP',
+      key: 'app_cadAlunos',
       storage,
-      whitelist: ['botaoClicado'],
     },
     reducers
   );
