@@ -22,14 +22,7 @@ export function App() {
           </PrivateRoute>
         }
       />
-      <Route
-        path="register"
-        element={
-          <PrivateRoute>
-            <Register />
-          </PrivateRoute>
-        }
-      />
+      <Route path="/register" element={<Register />} />
       <Route path="/account" element={<Account />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
