@@ -10,7 +10,7 @@ import axios from '../services/axios';
 // ...
 
 export default function Register() {
-  const [active, setMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,20 +37,21 @@ export default function Register() {
 
     if (formErr) return;
 
+    setIsLoading(true);
+
     try {
       const nome = name;
       await axios.post('/users', { nome, password, email });
       toast.success('Cadastro Criado!');
+      setIsLoading(false);
       navigateTo('/login'); // history
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
       errors.map((error) => toast.error(error));
+      setIsLoading(false);
     }
   }
 
-  const toogleButton = () => {
-    setMode(!active);
-  };
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
       <div className="absolute inset-0 bg-slate-800 bg-opacity-80" />
@@ -61,7 +62,10 @@ export default function Register() {
 
         <div className="w-[360px] h-[560px] bg-zinc-100 rounded">
           <div className="flex">
-            <Link to="/login">
+            <Link
+              to="/login"
+              className={isLoading ? 'pointer-events-none' : ''}
+            >
               <div className="flex items-center justify-center w-[180px] h-20 bg-zinc-300 rounded-tl border-r border-b border-zinc-400">
                 <p className="font-bold">Fazer Login</p>
               </div>
@@ -103,35 +107,12 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <AppButton onClick={toogleButton} type="submit">
-              {active ? (
-                <span>Criar Cadastro</span>
-              ) : (
-                <svg
-                  className="m-auto animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-              )}
+            <AppButton type="submit" isLoading={isLoading}>
+              <span>Criar Cadastro</span>
             </AppButton>
-            <Link to="/" className="text-sm text-center underline mt-8">
+            {/* <Link to="/" className="text-sm text-center underline mt-8">
               Fazer login
-            </Link>
+            </Link> */}
             <p className="pt-8 text-sm">
               Lorem ipsum dolor, sit amet consectetur.
             </p>

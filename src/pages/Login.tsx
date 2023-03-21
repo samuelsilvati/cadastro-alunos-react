@@ -5,22 +5,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import isEmail from 'validator/lib/isEmail';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AppButton from '../components/Button';
 import { loginRequest } from '../redux/auth/slice';
 import PasswordInput from '../components/PasswordInput';
+import { RootState } from '../redux/store';
 
 function Login() {
   const dispatch = useDispatch();
-  const [active, setMode] = useState(true);
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const navigateTo = useNavigate();
 
   async function handleLogin(e: { preventDefault: () => void }) {
-    let formErr = false;
     e.preventDefault();
-    setMode(!active);
+    let formErr = false;
 
     if (!isEmail(email)) {
       formErr = true;
@@ -52,8 +52,11 @@ function Login() {
             <div className="flex items-center justify-center w-[180px] h-20 rounded-tl">
               <p className="font-bold">Fazer Login</p>
             </div>
-            <Link to="/register">
-              <div className="flex items-center justify-center w-[180px] h-20 bg-zinc-300 rounded-tr border-l border-b border-zinc-400 ">
+            <Link
+              to="/register"
+              className={isLoading ? 'pointer-events-none' : ''}
+            >
+              <div className="flex items-center justify-center w-[180px] h-20 bg-zinc-300 rounded-tr border-l border-b border-zinc-400">
                 <p className="font-bold">Cadastro</p>
               </div>
             </Link>
@@ -80,31 +83,8 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <AppButton type="submit">
-              {active ? (
-                <span>Fazer Login</span>
-              ) : (
-                <svg
-                  className="m-auto animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-              )}
+            <AppButton type="submit" isLoading={isLoading}>
+              <span>Fazer Login</span>
             </AppButton>
             <p className="pt-8 text-sm">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus
