@@ -62,39 +62,3 @@ export const {
 } = authSlice.actions;
 
 export default authSlice.reducer;
-
-// import { createSlice } from '@reduxjs/toolkit';
-
-// interface State {
-//   isLoggedIn: any;
-//   token: any;
-//   user: any;
-//   isLoading: any;
-// }
-
-// const initialState: State = {
-//   isLoggedIn: false,
-//   token: false,
-//   user: {},
-//   isLoading: false,
-// };
-
-// const dataSlice = createSlice({
-//   name: 'auth',
-//   initialState,
-//   reducers: {
-//     loginRequest: (state, action) => {
-//       console.log('REDUCER', state, action.payload);
-//     },
-//     loginSuccess: (state, action) => {
-//       console.log('SUCCESS');
-//     },
-//     loginFailure: (state, action) => {
-//       return initialState;
-//     },
-//   },
-// });
-
-// export default dataSlice.reducer;
-
-// export const { loginRequest, loginSuccess, loginFailure } = dataSlice.actions;
