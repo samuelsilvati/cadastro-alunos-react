@@ -17,7 +17,7 @@ export function App() {
       <Route
         path="students"
         element={
-          <PrivateRoute isLoggedIn>
+          <PrivateRoute>
             <Students />
           </PrivateRoute>
         }
@@ -25,7 +25,7 @@ export function App() {
       <Route
         path="register"
         element={
-          <PrivateRoute isLoggedIn>
+          <PrivateRoute>
             <Register />
           </PrivateRoute>
         }
