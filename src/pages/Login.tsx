@@ -1,19 +1,43 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import isEmail from 'validator/lib/isEmail';
+import { useDispatch } from 'react-redux';
 import AppButton from '../components/Button';
+import { loginRequest } from '../redux/auth/slice';
 import PasswordInput from '../components/PasswordInput';
 
 function Login() {
+  const dispatch = useDispatch();
   const [active, setMode] = useState(true);
-  const toogleButton = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const navigateTo = useNavigate();
+
+  async function handleLogin(e: { preventDefault: () => void }) {
+    let formErr = false;
+    e.preventDefault();
     setMode(!active);
-    toast.success('Wow so easy!');
-  };
+
+    if (!isEmail(email)) {
+      formErr = true;
+      toast.error('E-mail-inválido');
+    }
+
+    if (password.length < 6 || password.length > 12) {
+      formErr = true;
+      toast.error('A senha deve ter entre de 6 e 12');
+    }
+
+    if (formErr) return;
+
+    dispatch(loginRequest({ email, password }));
+    // toast.success('Usuário Logado! (login.tsx)');
+    // navigateTo('/login');
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
@@ -34,7 +58,10 @@ function Login() {
               </div>
             </Link>
           </div>
-          <form className="pt-5 pr-8 pb-8 pl-8 flex flex-col">
+          <form
+            className="pt-5 pr-8 pb-8 pl-8 flex flex-col"
+            onSubmit={handleLogin}
+          >
             <label htmlFor="mail" className="text-xs pt-8">
               Endereço de e-mail
             </label>
@@ -42,12 +69,18 @@ function Login() {
               type="mail"
               id="mail"
               className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="" className="text-xs pt-4">
               Senha
             </label>
-            <PasswordInput />
-            <AppButton onClick={toogleButton}>
+            <PasswordInput
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <AppButton type="submit">
               {active ? (
                 <span>Fazer Login</span>
               ) : (
