@@ -1,18 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { get } from 'lodash';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
 import axios from '../services/axios';
+// ...
 
 export default function Register() {
   const [active, setMode] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigateTo = useNavigate();
 
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -39,6 +41,7 @@ export default function Register() {
       const nome = name;
       await axios.post('/users', { nome, password, email });
       toast.success('Cadastro Criado!');
+      navigateTo('/login'); // history
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
       errors.map((error) => toast.error(error));
@@ -126,7 +129,7 @@ export default function Register() {
                 </svg>
               )}
             </AppButton>
-            <Link to="/" className="text-sm text-center underline pt-8">
+            <Link to="/" className="text-sm text-center underline mt-8">
               Fazer login
             </Link>
             <p className="pt-8 text-sm">
