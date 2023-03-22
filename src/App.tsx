@@ -7,13 +7,21 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 import Students from './pages/Students';
+import LoginRoute from './routes/LoginRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
 export function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={
+          <LoginRoute>
+            <Login />
+          </LoginRoute>
+        }
+      />
       <Route
         path="students"
         element={
