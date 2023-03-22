@@ -1,7 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SignOut, User } from '@phosphor-icons/react';
+import { useDispatch } from 'react-redux';
+import { loginFailure } from '../redux/auth/slice';
 
 function Header() {
+  const navigateTo = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+    dispatch(loginFailure());
+    navigateTo('/login');
+  };
+
   return (
     <header className="fixed flex items-center justify-center w-full bg-zinc-400 z-30 border-b border-zinc-400">
       <div className="max-w-6xl pl-4 pr-4 grow flex items-center justify-between">
@@ -35,6 +45,7 @@ function Header() {
             </li>
             <li>
               <Link
+                onClick={handleLogout}
                 to="/exit"
                 className="flex justify-center p-1 hover:text-gray-200 transition ease-in-out duration-150"
               >
