@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import isEmail from 'validator/lib/isEmail';
@@ -16,7 +16,6 @@ function Login() {
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const navigateTo = useNavigate();
 
   async function handleLogin(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -35,8 +34,6 @@ function Login() {
     if (formErr) return;
 
     dispatch(loginRequest({ email, password }));
-    // toast.success('Usuário Logado! (login.tsx)');
-    // navigateTo('/login');
   }
 
   return (
@@ -87,10 +84,10 @@ function Login() {
               <span>Fazer Login</span>
             </AppButton>
             <p className="pt-8 text-sm">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus
-              voluptatum facilis vitae suscipit culpa. Repellendus, inventore
-              iusto omnis animi odit alias asperiores sequi porro eligendi,
-              quaerat illum voluptates harum? Mollitia.
+              Bem-vindo ao nosso sistema de cadastro de alunos! Para acessar as
+              funcionalidades do sistema, por favor, faça o login com suas
+              credenciais acima. Caso ainda não tenha uma conta, clique em
+              &quot;Cadastro&quot; para criar uma nova.
             </p>
           </form>
         </div>
