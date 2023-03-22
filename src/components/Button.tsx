@@ -1,10 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/button-has-type */
-// type Props = React.DetailedHTMLProps<
-//   React.ButtonHTMLAttributes<HTMLButtonElement>,
-//   HTMLButtonElement
-// >;
-
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 interface ButtonProps
@@ -12,11 +7,10 @@ interface ButtonProps
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  // eslint-disable-next-line react/require-default-props
   isLoading?: boolean;
 }
 
-function AppButton({ isLoading = false, ...props }: ButtonProps) {
+function AppButton({ isLoading, ...props }: ButtonProps) {
   if (!isLoading)
     return (
       <button
@@ -53,5 +47,9 @@ function AppButton({ isLoading = false, ...props }: ButtonProps) {
     </button>
   );
 }
+
+AppButton.defaultProps = {
+  isLoading: false,
+};
 
 export default AppButton;
