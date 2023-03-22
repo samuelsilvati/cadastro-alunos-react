@@ -15,7 +15,7 @@ function AppButton({ isLoading, ...props }: ButtonProps) {
     return (
       <button
         {...props}
-        className="h-9 mt-8 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150 "
+        className="h-9 mt-8 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150"
       />
     );
   return (
