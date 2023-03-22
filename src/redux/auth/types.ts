@@ -6,6 +6,7 @@ export interface LoginRequestPayload {
 export interface User {
   nome: string;
   email: string;
+  id: number;
 }
 
 export interface AuthState {

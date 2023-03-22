@@ -9,6 +9,7 @@ const initialState: AuthState = {
   user: {
     nome: '',
     email: '',
+    id: 0,
   },
   isLoading: false,
 };
@@ -30,7 +31,7 @@ const authSlice = createSlice({
     loginFailure: (state) => {
       state.isLoggedIn = false;
       state.token = false;
-      state.user = { nome: '', email: '' };
+      state.user = { nome: '', email: '', id: 0 };
       state.isLoading = false;
     },
     registerRequest: (state) => {
