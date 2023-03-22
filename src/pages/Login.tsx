@@ -71,7 +71,7 @@ function Login() {
             <input
               type="mail"
               id="mail"
-              className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 outline-0"
+              className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 hover:border-cyan-600 outline-0"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
