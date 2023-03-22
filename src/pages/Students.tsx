@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { get } from 'lodash';
 import axios from '../services/axios';
+import Loading from '../components/Loading';
 
 interface Student {
   id: number;
@@ -20,17 +21,21 @@ interface Image {
 
 function Students() {
   const [students, setStudents] = useState<Student[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     async function getData() {
       const response = await axios.get('/alunos');
       setStudents(response.data);
+      setIsLoading(false);
     }
     getData();
   }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
+      <Loading isLoading={isLoading} />
       <div className="absolute inset-0 bg-slate-800 bg-opacity-80" />
       <div className="z-10">
         <h1 className="text-slate-50 text-4xl font-bold text-center pb-9">
