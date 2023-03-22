@@ -22,6 +22,7 @@ function PasswordInput(props: Props) {
         className="rounded h-9 pl-2 border border-zinc-300 focus:border focus:border-cyan-600 hover:border-cyan-600 outline-0 absolute w-[296px]"
       />
       <button
+        type="button"
         onClick={handleClickShowPassword}
         className="text-gray-400 relative pr-2"
       >
