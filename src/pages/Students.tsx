@@ -21,7 +21,7 @@ interface Image {
 
 function Students() {
   const [students, setStudents] = useState<Student[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function Students() {
           </button>
         </div>
         <p className="text-center pt-6">
-          <Link to="/student/new" className="text-slate-50 underline ">
+          <Link to="/" className="text-slate-50 underline ">
             Ir para a página inicial
           </Link>
         </p>
