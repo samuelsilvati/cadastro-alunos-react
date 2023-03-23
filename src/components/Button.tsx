@@ -8,14 +8,20 @@ interface ButtonProps
     HTMLButtonElement
   > {
   isLoading?: boolean;
+  isEnable: boolean;
 }
 
-function AppButton({ isLoading, ...props }: ButtonProps) {
+function AppButton({ isLoading, isEnable, ...props }: ButtonProps) {
   if (!isLoading)
     return (
       <button
         {...props}
-        className="h-9 mt-8 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150"
+        className={
+          isEnable
+            ? 'h-9 mt-8 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150'
+            : 'h-9 mt-8 text-zinc-500 text-xs font-semibold border border-zinc-500 rounded cursor-default'
+        }
+        disabled={!isEnable}
       />
     );
   return (
