@@ -42,7 +42,7 @@ export function WrappedApp() {
     <BrowserRouter>
       <Header />
       <App />
-      <ToastContainer />
+      <ToastContainer position="top-center" />
     </BrowserRouter>
   );
 }
