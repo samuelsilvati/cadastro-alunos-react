@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { get } from 'lodash';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from '../services/axios';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
 import { RootState } from '../redux/store';
+import { loginFailure } from '../redux/auth/slice';
 
 function Account() {
   const authData = useSelector((state: RootState) => state.auth.user);
@@ -17,7 +18,8 @@ function Account() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { id } = authData;
-  // const navigateTo = useNavigate();
+  const dispatch = useDispatch();
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     setName(authData.nome);
@@ -58,6 +60,13 @@ function Account() {
       // navigateTo('/login'); // history
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
+      const status = get(err, 'response.status', null);
+      if (status === 401) {
+        toast.error('Faça login novamente!');
+        dispatch(loginFailure());
+        navigateTo('/login');
+        return;
+      }
       errors.map((error) => toast.error(error));
       setIsLoading(false);
     }
