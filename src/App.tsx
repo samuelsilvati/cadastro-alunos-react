@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Students from './pages/Students';
 import LoginRoute from './routes/LoginRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import Student from './pages/Student';
 
 export function App() {
   return (
@@ -30,6 +31,8 @@ export function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/student/:id/edit" element={<Student />} />
+      <Route path="/student/new" element={<Student />} />
       <Route path="/register" element={<Register />} />
       <Route path="/account" element={<Account />} />
       <Route path="*" element={<NotFound />} />
