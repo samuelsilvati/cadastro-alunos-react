@@ -21,6 +21,7 @@ function Student() {
   const { id } = useParams<Params>();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [isEnable, setIsEnable] = useState(true);
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -121,8 +122,52 @@ function Student() {
     }
   }
 
+  const handleDelete = async () => {
+    try {
+      setIsLoading(true);
+      await axios.delete(`/alunos/${id}`);
+      toast.success('Aluno Apagado!');
+      setIsLoading(false);
+      navigateTo('/students');
+    } catch (err) {
+      const errors = get(err, 'response.data.errors', []);
+      errors.map((error) => toast.error(error));
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
+      <div // Modal
+        className={
+          isModal
+            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-black bg-opacity-40 backdrop-blur-sm transition ease-in-out duration-500'
+            : 'hidden'
+        }
+      >
+        <div className="w-[300px] h-max p-2 rounded bg-zinc-100 shadow-inner">
+          <p className="p-2 text-center">
+            Tem certeza que deseja excluir o cadastro?
+          </p>
+          <div className="flex justify-center pb-3 pt-2">
+            <button
+              onClick={handleDelete}
+              type="button"
+              className="h-9 w-24 mr-3 text-white text-xs font-semibold bg-red-400 rounded hover:bg-red-500 transition ease-in-out duration-150"
+            >
+              Sim
+            </button>
+            <button
+              onClick={() => {
+                setIsModal(false);
+              }}
+              type="button"
+              className="h-9 w-24 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150"
+            >
+              Não
+            </button>
+          </div>
+        </div>
+      </div>
       <Loading isLoading={isLoading} />
       <div className="absolute inset-0 bg-slate-800 bg-opacity-80" />
       <div className="z-10">
@@ -208,7 +253,7 @@ function Student() {
             {id ? (
               <button
                 onClick={() => {
-                  navigateTo('/student/new');
+                  setIsModal(true);
                 }}
                 data-tooltip-target="tooltip-left"
                 data-tooltip-placement="left"
