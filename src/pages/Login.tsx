@@ -15,6 +15,7 @@ function Login() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
   const [email, setEmail] = useState('');
+  const [isEnable, setIsEnable] = useState(false);
   const [password, setPassword] = useState('');
 
   async function handleLogin(e: { preventDefault: () => void }) {
@@ -78,9 +79,12 @@ function Login() {
             <PasswordInput
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setIsEnable(e.target.value.length > 5); // Habilita o botão apenas quando a senha for maior que 5 caracteres
+              }}
             />
-            <AppButton type="submit" isLoading={isLoading}>
+            <AppButton type="submit" isLoading={isLoading} isEnable={isEnable}>
               <span>Fazer Login</span>
             </AppButton>
             <p className="pt-8 text-sm">

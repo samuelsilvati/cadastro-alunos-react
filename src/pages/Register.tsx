@@ -11,6 +11,7 @@ import axios from '../services/axios';
 
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isEnable, setIsEnable] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -105,9 +106,12 @@ export default function Register() {
             <PasswordInput
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setIsEnable(e.target.value.length > 5); // Habilita o botão apenas quando a senha for maior que 5 caracteres
+              }}
             />
-            <AppButton type="submit" isLoading={isLoading}>
+            <AppButton type="submit" isLoading={isLoading} isEnable={isEnable}>
               <span>Criar Cadastro</span>
             </AppButton>
             {/* <Link to="/" className="text-sm text-center underline mt-8">
