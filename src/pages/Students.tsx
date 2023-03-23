@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { User, UserCirclePlus } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { get } from 'lodash';
 import axios from '../services/axios';
 import Loading from '../components/Loading';
@@ -22,6 +22,7 @@ interface Image {
 function Students() {
   const [students, setStudents] = useState<Student[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,10 +43,10 @@ function Students() {
           Alunos
         </h1>
 
-        <div className="w-[max-width] min-h-[600px] bg-zinc-100 rounded">
+        <div className="w-[max-width] h-[600px] bg-zinc-100 rounded overflow-auto">
           <div className="pt-2">
             {students.map((student) => (
-              <Link to="/aluno:id" key={student.id}>
+              <Link to={`/student/${student.id}/edit`} key={student.id}>
                 <div
                   key={student.id}
                   className="flex items-center gap-4 px-4 py-3  border-1 border-b font-medium hover:bg-zinc-200 transition ease-in-out duration-150"
@@ -73,6 +74,9 @@ function Students() {
             ))}
           </div>
           <button
+            onClick={() => {
+              navigateTo('/student/new');
+            }}
             data-tooltip-target="tooltip-left"
             data-tooltip-placement="left"
             type="button"
@@ -85,7 +89,7 @@ function Students() {
           </button>
         </div>
         <p className="text-center pt-6">
-          <Link to="/" className="text-slate-50 underline ">
+          <Link to="/student/new" className="text-slate-50 underline ">
             Ir para a página inicial
           </Link>
         </p>
