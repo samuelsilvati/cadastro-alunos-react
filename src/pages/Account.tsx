@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { get } from 'lodash';
 import { useSelector } from 'react-redux';
+import axios from '../services/axios';
 import AppButton from '../components/Button';
 import PasswordInput from '../components/PasswordInput';
-import axios from '../services/axios';
 import { RootState } from '../redux/store';
 
 function Account() {
@@ -16,7 +16,8 @@ function Account() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigateTo = useNavigate();
+  const { id } = authData;
+  // const navigateTo = useNavigate();
 
   useEffect(() => {
     setName(authData.nome);
@@ -37,7 +38,7 @@ function Account() {
       toast.error('E-mail-inválido');
     }
 
-    if (password.length < 6 || password.length > 12) {
+    if (!id && (password.length < 6 || password.length > 12)) {
       formErr = true;
       toast.error('A senha deve ter entre de 6 e 12');
     }
@@ -45,13 +46,16 @@ function Account() {
     if (formErr) return;
 
     setIsLoading(true);
-
+    const nome = name;
     try {
-      const nome = name;
-      await axios.post('/users', { nome, password, email });
-      toast.success('Cadastro Criado!');
+      await axios.put('/users', {
+        nome,
+        password: password || undefined,
+        email,
+      });
+      toast.success('Cadastro Atualizado!');
       setIsLoading(false);
-      navigateTo('/login'); // history
+      // navigateTo('/login'); // history
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
       errors.map((error) => toast.error(error));
@@ -77,7 +81,7 @@ function Account() {
             Edite os seus dados ou altere sua senha abaixo:
           </p>
           <form
-            className="pt-5 pr-8 pb-8 pl-8 flex flex-col"
+            className="pt-7 pr-8 pb-8 pl-8 flex flex-col"
             onSubmit={handleSubmit}
           >
             <label htmlFor="name" className="text-xs">
@@ -101,35 +105,16 @@ function Account() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="" className="text-xs pt-4">
-              Senha Atual
+              Nova Senha &#40;Opcional&#41;
             </label>
             <PasswordInput
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label htmlFor="" className="text-xs pt-4">
-              Nova Senha
-            </label>
-            <PasswordInput
-              id="password"
-              value={password}
-              // onChange={(e) => setPassword(e.target.value)}
-            />
-            <label htmlFor="" className="text-xs pt-4">
-              Repita a Senha
-            </label>
-            <PasswordInput
-              id="password"
-              value={password}
-              // onChange={(e) => setPassword(e.target.value)}
-            />
-            <AppButton type="submit" isLoading={isLoading}>
-              <span>Salvar Sados</span>
+            <AppButton type="submit" isLoading={isLoading} isEnable>
+              <span>Salvar Dados</span>
             </AppButton>
-            {/* <Link to="/" className="text-sm text-center underline mt-8">
-              Fazer login
-            </Link> */}
           </form>
         </div>
       </div>
