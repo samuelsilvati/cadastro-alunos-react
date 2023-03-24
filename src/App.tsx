@@ -9,7 +9,9 @@ import Register from './pages/Register';
 import Students from './pages/Students';
 import LoginRoute from './routes/LoginRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import Student from './pages/Student';
+import EditStudent from './pages/EditStudent';
+import NewStudent from './pages/NewStudent';
+import Images from './pages/Images';
 
 export function App() {
   return (
@@ -31,8 +33,9 @@ export function App() {
           </PrivateRoute>
         }
       />
-      <Route path="/student/:id/edit" element={<Student />} />
-      <Route path="/student/new" element={<Student />} />
+      <Route path="/images/:id/" element={<Images />} />
+      <Route path="/student/:id/edit" element={<EditStudent />} />
+      <Route path="/student/new" element={<NewStudent />} />
       <Route path="/register" element={<Register />} />
       <Route path="/account" element={<Account />} />
       <Route path="*" element={<NotFound />} />
