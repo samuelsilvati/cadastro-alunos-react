@@ -43,7 +43,7 @@ function Students() {
           Alunos
         </h1>
 
-        <div className="w-[max-width] h-[600px] bg-zinc-100 rounded overflow-auto">
+        <div className="w-[418px] h-[600px] bg-zinc-100 rounded overflow-auto">
           <div className="pt-2">
             {students.map((student) => (
               <Link to={`/student/${student.id}/edit`} key={student.id}>
@@ -55,7 +55,7 @@ function Students() {
                     <img
                       src={student?.Images?.[0]?.url}
                       alt=""
-                      className="w-16 rounded-full"
+                      className="w-16 h-16 rounded-full"
                     />
                   ) : (
                     <div className="rounded-full w-16 h-16 bg-zinc-300 flex justify-center">

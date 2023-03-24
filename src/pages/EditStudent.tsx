@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Eraser } from '@phosphor-icons/react';
+import { Eraser, FileImage, User, UserCirclePlus } from '@phosphor-icons/react';
 import { get } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
-
 import AppButton from '../components/Button';
 import Loading from '../components/Loading';
 import { loginFailure } from '../redux/auth/slice';
@@ -17,12 +16,13 @@ interface Params {
   id: string;
 }
 
-function Student() {
+function EditStudent() {
   const { id } = useParams<Params>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [isEnable, setIsEnable] = useState(true);
+  const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,13 +33,11 @@ function Student() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!id) return;
     async function getData() {
       try {
-        setIsLoading(true);
         const { data } = await axios.get(`/alunos/${id}`);
         const Image = get(data, 'Images[0].url', '');
-
+        setImage(Image);
         setName(data.nome);
         setLastName(data.sobrenome);
         setEmail(data.email);
@@ -84,28 +82,28 @@ function Student() {
       const peso = weight;
       const altura = height;
       setIsLoadingButton(true);
-      if (id) {
-        await axios.put(`/alunos/${id}`, {
-          nome,
-          sobrenome,
-          email,
-          idade,
-          peso,
-          altura,
-        });
-        toast.success('Cadastro Atualizado!');
-      } else {
-        const { data } = await axios.post('/alunos/', {
-          nome,
-          sobrenome,
-          email,
-          idade,
-          peso,
-          altura,
-        });
-        toast.success('Cadastro Criado!');
-        navigateTo(`/student/${data.id}/edit`);
-      }
+      // if (id) {
+      await axios.put(`/alunos/${id}`, {
+        nome,
+        sobrenome,
+        email,
+        idade,
+        peso,
+        altura,
+      });
+      toast.success('Cadastro Atualizado!');
+      // } else {
+      //   const { data } = await axios.post('/alunos/', {
+      //     nome,
+      //     sobrenome,
+      //     email,
+      //     idade,
+      //     peso,
+      //     altura,
+      //   });
+      //   toast.success('Cadastro Criado!');
+      //   navigateTo(`/student/${data.id}/edit`);
+      // }
       setIsLoadingButton(false);
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
@@ -118,7 +116,6 @@ function Student() {
       }
       if (status === 401) dispatch(loginFailure());
       setIsLoadingButton(false);
-      console.log(errors.length);
     }
   }
 
@@ -137,10 +134,11 @@ function Student() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
+      <Loading isLoading={isLoading} />
       <div // Modal
         className={
           isModal
-            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-black bg-opacity-40 backdrop-blur-sm transition ease-in-out duration-500'
+            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-slate-700 bg-opacity-40 backdrop-blur-sm transition ease-in-out duration-500'
             : 'hidden'
         }
       >
@@ -168,19 +166,43 @@ function Student() {
           </div>
         </div>
       </div>
-      <Loading isLoading={isLoading} />
       <div className="absolute inset-0 bg-slate-800 bg-opacity-80" />
-      <div className="z-10">
+      <div className="z-10 overflow-auto mt-14">
         <h1 className="text-slate-50 text-4xl font-bold text-center pb-9">
-          {id ? 'Editar Aluno' : 'Novo Aluno'}
+          Editar Aluno
         </h1>
 
-        <div className="w-[360px] h-[560px] bg-zinc-100 rounded">
+        <div className="w-[360px] h-max bg-zinc-100 rounded">
+          <div className="w-full flex items-center justify-center pt-7">
+            <div className="flex flex-col items-center">
+              {image ? (
+                <img
+                  src={image}
+                  alt={image}
+                  className="w-[172px] h-[172px] rounded-full border-2 border-cyan-600"
+                />
+              ) : (
+                <div className="rounded-full w-[172px] h-[172px] bg-zinc-300 flex items-center justify-center border-2 border-cyan-600">
+                  <div>
+                    <User size={100} className="m-0 text-zinc-400" />
+                  </div>
+                </div>
+              )}
+              <div className='flex items-center justify-center w-9 h-9 mt-[-18px] bg-cyan-600 rounded-full p-1 bottom-28 hover:scale-110 hover:bg-cyan-700 transition ease-in-out duration-150"'>
+                <Link to={`/images/${id}`}>
+                  <FileImage
+                    size={24}
+                    className="text-cyan-800 hover:text-cyan-900"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
           <form
-            className="pt-5 pr-8 pb-8 pl-8 flex flex-col"
+            className="pt-2 pr-8 pb-8 pl-8 flex flex-col"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="name" className="text-xs pt-8">
+            <label htmlFor="name" className="text-xs">
               Nome
             </label>
             <input
@@ -248,9 +270,24 @@ function Student() {
               isLoading={isLoadingButton}
               isEnable={isEnable}
             >
-              <span>{id ? 'Salvar Dados' : 'Criar Cadastro'}</span>
+              <span>Salvar Dados</span>
             </AppButton>
-            {id ? (
+
+            <div>
+              <button
+                onClick={() => {
+                  navigateTo('/student/new');
+                }}
+                data-tooltip-target="tooltip-left"
+                data-tooltip-placement="left"
+                type="button"
+                className="absolute bg-cyan-600 rounded-full p-2 bottom-28 right-7 hover:scale-125 hover:bg-cyan-700 transition ease-in-out duration-150"
+              >
+                <UserCirclePlus
+                  size={44}
+                  className="text-cyan-800 hover:text-cyan-900"
+                />
+              </button>
               <button
                 onClick={() => {
                   setIsModal(true);
@@ -265,10 +302,33 @@ function Student() {
                   className="text-cyan-800 hover:text-cyan-900"
                 />
               </button>
-            ) : (
-              ''
-            )}
+            </div>
           </form>
+
+          {/* // <div className="flex items-center justify-center w-full h-full border-red-50">
+            //   <div>
+            //     <svg
+            //       className="animate-spin h-6 w-6 text-cyan-800"
+            //       xmlns="http://www.w3.org/2000/svg"
+            //       fill="none"
+            //       viewBox="0 0 24 24"
+            //     >
+            //       <circle
+            //         className="opacity-25"
+            //         cx="12"
+            //         cy="12"
+            //         r="10"
+            //         stroke="currentColor"
+            //         strokeWidth="4"
+            //       />
+            //       <path
+            //         className="opacity-75"
+            //         fill="currentColor"
+            //         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            //       />
+            //     </svg>
+            //   </div>
+            // </div> */}
         </div>
         <p className="text-center pt-6">
           <Link to="/students" className="text-slate-50 underline pt-6">
@@ -280,4 +340,4 @@ function Student() {
   );
 }
 
-export default Student;
+export default EditStudent;
