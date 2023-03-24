@@ -14,6 +14,8 @@ import { loginFailure } from '../redux/auth/slice';
 function Account() {
   const authData = useSelector((state: RootState) => state.auth.user);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,8 +74,53 @@ function Account() {
     }
   }
 
+  const handleDelete = async () => {
+    try {
+      setIsLoadingDelete(true);
+      await axios.delete(`/users/${id}`);
+      toast.success('Conta Apagada!');
+      dispatch(loginFailure());
+      setIsLoadingDelete(false);
+      navigateTo('/login');
+    } catch (err) {
+      const errors = get(err, 'response.data.errors', []);
+      errors.map((error) => toast.error(error));
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-[url('/src/img/background.webp')] bg-cover font-roboto">
+      <div // Modal
+        className={
+          isModal
+            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-slate-700 bg-opacity-40 backdrop-blur-sm transition ease-in-out duration-500'
+            : 'hidden'
+        }
+      >
+        <div className="w-[300px] h-max p-2 rounded bg-zinc-100 shadow-inner">
+          <p className="p-2 text-center">
+            Tem certeza que deseja excluir a conta?
+          </p>
+          <div className="flex justify-center pb-3 pt-2">
+            <button
+              onClick={handleDelete}
+              type="button"
+              className="h-9 w-24 mr-3 text-white text-xs font-semibold bg-red-400 rounded hover:bg-red-500 transition ease-in-out duration-150"
+            >
+              Sim
+            </button>
+            <button
+              onClick={() => {
+                setIsModal(false);
+              }}
+              type="button"
+              className="h-9 w-24 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150"
+            >
+              Não
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="absolute inset-0 bg-slate-800 bg-opacity-80" />
       <div className="z-10">
         <h1 className="text-slate-50 text-4xl font-bold text-center pb-9">
@@ -121,8 +168,26 @@ function Account() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <AppButton type="submit" isLoading={isLoading} isEnable>
-              <span>Salvar Dados</span>
+            <div className="flex mt-8 mb-4 w-full">
+              <AppButton
+                type="submit"
+                isLoading={isLoading}
+                isEnable
+                isRed={false}
+              >
+                <span>Salvar Dados</span>
+              </AppButton>
+            </div>
+            <AppButton
+              type="button"
+              isLoading={isLoadingDelete}
+              isEnable
+              isRed
+              onClick={() => {
+                setIsModal(true);
+              }}
+            >
+              <span>Apagar Conta</span>
             </AppButton>
           </form>
         </div>
