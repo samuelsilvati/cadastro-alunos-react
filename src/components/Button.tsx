@@ -9,17 +9,21 @@ interface ButtonProps
   > {
   isLoading?: boolean;
   isEnable: boolean;
+  isRed: boolean;
 }
 
-function AppButton({ isLoading, isEnable, ...props }: ButtonProps) {
+function AppButton({ isLoading, isEnable, isRed, ...props }: ButtonProps) {
   if (!isLoading)
     return (
       <button
         {...props}
         className={
+          // eslint-disable-next-line no-nested-ternary
           isEnable
-            ? 'h-9 mt-8 text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150'
-            : 'h-9 mt-8 text-zinc-500 text-xs font-semibold border border-zinc-500 rounded cursor-default'
+            ? isRed
+              ? 'h-9 mt-1 w-full text-white text-xs font-semibold bg-rose-500 rounded hover:bg-rose-700 transition ease-in-out duration-150'
+              : 'h-9 mt-1 w-full text-white text-xs font-semibold bg-cyan-600 rounded hover:bg-cyan-800 transition ease-in-out duration-150'
+            : 'h-9 mt-1 text-zinc-500 text-xs font-semibold border border-zinc-500 rounded cursor-default'
         }
         disabled={!isEnable}
       />
@@ -27,7 +31,11 @@ function AppButton({ isLoading, isEnable, ...props }: ButtonProps) {
   return (
     <button
       type="button"
-      className="inline-flex items-center justify-center  h-9 mt-8 font-semibold text-white text-xs bg-cyan-800 rounded hover:bg-cyan-900 transition ease-in-out duration-150 cursor-not-allowed"
+      className={
+        !isRed
+          ? 'inline-flex items-center justify-center w-full h-9 mt-1 font-semibold text-white text-xs bg-cyan-800 rounded hover:bg-cyan-900 transition ease-in-out duration-150 }cursor-not-allowed'
+          : 'inline-flex items-center justify-center w-full h-9 mt-1 font-semibold text-white text-xs bg-red-500 rounded hover:bg-red-400 transition ease-in-out duration-150 }cursor-not-allowed'
+      }
       disabled={isLoading}
     >
       <svg
