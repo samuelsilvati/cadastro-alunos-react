@@ -5,7 +5,7 @@ interface Props {
 function Loading({ isLoading = false }: Props) {
   if (isLoading)
     return (
-      <div className="absolute flex items-center justify-center w-full h-full bg-slate-600 z-40 ">
+      <div className="absolute flex items-center justify-center w-full h-full bg-slate-600 bg-opacity-80 backdrop-blur-lg z-40 ">
         <div>
           <svg
             className="animate-spin h-9 w-9 text-white relative"
