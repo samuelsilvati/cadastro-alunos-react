@@ -265,13 +265,16 @@ function EditStudent() {
               value={height}
               onChange={(e) => setHeight(e.target.value)}
             />
-            <AppButton
-              type="submit"
-              isLoading={isLoadingButton}
-              isEnable={isEnable}
-            >
-              <span>Salvar Dados</span>
-            </AppButton>
+            <div className="flex flex-col mt-6 w-full">
+              <AppButton
+                type="submit"
+                isLoading={isLoadingButton}
+                isEnable={isEnable}
+                isRed={false}
+              >
+                <span>Salvar Dados</span>
+              </AppButton>
+            </div>
 
             <div>
               <button
