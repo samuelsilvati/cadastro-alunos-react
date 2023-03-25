@@ -84,9 +84,16 @@ function Login() {
                 setIsEnable(e.target.value.length > 5); // Habilita o botão apenas quando a senha for maior que 5 caracteres
               }}
             />
-            <AppButton type="submit" isLoading={isLoading} isEnable={isEnable}>
-              <span>Fazer Login</span>
-            </AppButton>
+            <div className="flex flex-col mt-8 w-full">
+              <AppButton
+                type="submit"
+                isLoading={isLoading}
+                isEnable={isEnable}
+                isRed={false}
+              >
+                <span>Fazer Login</span>
+              </AppButton>
+            </div>
             <p className="pt-8 text-sm">
               Bem-vindo ao nosso sistema de cadastro de alunos! Para acessar as
               funcionalidades do sistema, por favor, faça o login com suas

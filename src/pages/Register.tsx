@@ -111,9 +111,16 @@ export default function Register() {
                 setIsEnable(e.target.value.length > 5); // Habilita o botão apenas quando a senha for maior que 5 caracteres
               }}
             />
-            <AppButton type="submit" isLoading={isLoading} isEnable={isEnable}>
-              <span>Criar Cadastro</span>
-            </AppButton>
+            <div className="flex flex-col mt-8 w-full">
+              <AppButton
+                type="submit"
+                isLoading={isLoading}
+                isEnable={isEnable}
+                isRed={false}
+              >
+                <span>Criar Cadastro</span>
+              </AppButton>
+            </div>
             {/* <Link to="/" className="text-sm text-center underline mt-8">
               Fazer login
             </Link> */}

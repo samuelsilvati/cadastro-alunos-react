@@ -146,9 +146,16 @@ function NewStudent() {
               value={height}
               onChange={(e) => setHeight(e.target.value)}
             />
-            <AppButton type="submit" isLoading={isLoading} isEnable={isEnable}>
-              <span>Criar Cadastro</span>
-            </AppButton>
+            <div className="flex flex-col mt-6 w-full">
+              <AppButton
+                type="submit"
+                isLoading={isLoading}
+                isEnable={isEnable}
+                isRed={false}
+              >
+                <span>Criar Cadastro</span>
+              </AppButton>
+            </div>
           </form>
         </div>
         <p className="text-center pt-6">
