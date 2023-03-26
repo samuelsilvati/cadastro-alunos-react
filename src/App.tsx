@@ -12,6 +12,10 @@ import PrivateRoute from './routes/PrivateRoute';
 import EditStudent from './pages/EditStudent';
 import NewStudent from './pages/NewStudent';
 import Images from './pages/Images';
+import HomePage from './pages/Home copy';
+import Dashboard from './pages/Dashboard';
+import EditStudentComponent from './components/dashboard/EditStudentComponent';
+import NewStudentComponent from './components/dashboard/NewStudentComponent';
 
 export function App() {
   return (
@@ -33,7 +37,12 @@ export function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard/newstudent" element={<NewStudentComponent />} />
+        <Route path="/dashboard/:id/edit" element={<EditStudentComponent />} />
+      </Route>
       <Route path="/images/:id/" element={<Images />} />
+      <Route path="/logscreen" element={<HomePage />} />
       <Route path="/student/:id/edit" element={<EditStudent />} />
       <Route path="/student/new" element={<NewStudent />} />
       <Route path="/register" element={<Register />} />

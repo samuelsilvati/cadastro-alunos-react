@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import EditStudentComponent from '../components/dashboard/EditStudentComponent';
+import { Outlet } from 'react-router-dom';
 import HeaderDashboard from '../components/dashboard/HeaderDashboard';
 import ListStudents from '../components/dashboard/ListStudents';
 import SideBar from '../components/dashboard/SideBar';
@@ -22,7 +22,8 @@ function Dashboard() {
             </div>
             {/* EDIT STUDENTS / CREATE STUDENTS */}
             <div className="w-[65%] bg-white mr-3 mb-3 p-9 rounded-xl hidden 2xl:flex">
-              <EditStudentComponent />
+              <Outlet />
+              {/* <EditStudentComponent /> */}
             </div>
           </div>
         </div>
