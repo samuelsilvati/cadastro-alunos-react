@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { MagnifyingGlass, Plus } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 
 function HeaderDashboard() {
   return (
@@ -11,13 +12,19 @@ function HeaderDashboard() {
           className="h-10 w-full mx-2 outline-none border-none bg-zinc-200"
         />
       </div>
-      <button className="rounded-lg h-11 w-[200px] text-lg hidden xl:flex items-center justify-center gap-3 text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400">
+      <Link
+        to="/dashboard/newstudent"
+        className="rounded-lg h-11 w-[200px] text-lg hidden xl:flex items-center justify-center gap-3 text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400"
+      >
         <Plus size={22} weight="bold" />
         Adicionar
-      </button>
-      <button className="rounded-full xl:hidden h-11 w-11 ml-4 text-lg flex items-center justify-center gap-3 text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400">
+      </Link>
+      <Link
+        to="/dashboard/newstudent"
+        className="rounded-full xl:hidden h-11 w-11 ml-4 text-lg flex items-center justify-center gap-3 text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400"
+      >
         <Plus size={22} weight="bold" />
-      </button>
+      </Link>
     </div>
   );
 }
