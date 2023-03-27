@@ -14,7 +14,7 @@ const LoginRoute: React.FC<Props> = ({ children }) => {
   return !isLoggedIn ? (
     children
   ) : (
-    <Navigate to="/students" state={{ from: location }} replace />
+    <Navigate to="/dashboard" state={{ from: location }} replace />
   );
 };
 
