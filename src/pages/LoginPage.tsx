@@ -1,9 +1,40 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Barbell } from '@phosphor-icons/react';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
+import { RootState } from '../redux/store';
+import { loginRequest } from '../redux/auth/slice';
 
-function HomePage() {
+function LoginPage() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const [email, setEmail] = useState('');
+  const [isEnable, setIsEnable] = useState(false);
+  const [password, setPassword] = useState('');
+
+  async function handleLogin(e: { preventDefault: () => void }) {
+    e.preventDefault();
+    let formErr = false;
+
+    if (!isEmail(email)) {
+      formErr = true;
+      toast.error('E-mail-inválido');
+    }
+
+    if (password.length < 6 || password.length > 12) {
+      formErr = true;
+      toast.error('A senha deve ter entre de 6 e 12 caracteres');
+    }
+
+    if (formErr) return;
+
+    dispatch(loginRequest({ email, password }));
+  }
+
   return (
     <>
       <header className="absolute">
@@ -44,22 +75,33 @@ function HomePage() {
         </div>
         <div className="h-full w-[65%] flex items-center justify-center">
           <div className="flex flex-col w-96">
-            <form action="">
+            <form onSubmit={handleLogin}>
               <Barbell size={38} className="font-bold" />
               <h1 className="text-xl md:text-2xl font-bold pb-9">
                 Faça login no GymNation
               </h1>
-              <label className="text-lg font-semibold">E-mail</label>
+              <label htmlFor="mail" className="text-lg font-semibold">
+                E-mail
+              </label>
               <input
                 type="mail"
                 id="mail"
                 className="rounded-lg h-11 w-full pl-2 mb-4 border-2 bg-zinc-50 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <label className="text-lg font-semibold">Senha</label>
+              <label htmlFor="password" className="text-lg font-semibold">
+                Senha
+              </label>
               <input
                 type="password"
-                id="mail"
+                id="password"
                 className="rounded-lg h-11 w-full pl-2 mb-8 border-2 bg-zinc-50 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setIsEnable(e.target.value.length > 5); // Habilita o botão apenas quando a senha for maior que 5 caracteres
+                }}
               />
               <div className="flex justify-between mr-2 mb-2 ml-2">
                 <Link
@@ -75,8 +117,39 @@ function HomePage() {
                   Precisa de uma conta?
                 </Link>
               </div>
-              <button className="rounded-lg h-11 w-full text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400">
-                Entrar
+              <button
+                type="submit"
+                className={
+                  !isEnable
+                    ? ' flex items-center justify-center rounded-lg h-11 w-full text-lg text-white font-bold bg-indigo-400'
+                    : ' flex items-center justify-center rounded-lg h-11 w-full text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400'
+                }
+                disabled={!isEnable}
+              >
+                {!isLoading ? (
+                  'Entrar'
+                ) : (
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25 text"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                )}
               </button>
             </form>
           </div>
@@ -86,4 +159,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default LoginPage;
