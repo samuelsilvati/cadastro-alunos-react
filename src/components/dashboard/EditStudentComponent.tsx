@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import { Eraser, FileImage, Images, User } from '@phosphor-icons/react';
+import { Eraser, FileImage, Images } from '@phosphor-icons/react';
 import { get } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -100,6 +100,8 @@ function EditStudentComponent() {
       });
       toast.success('Cadastro Atualizado!');
       setIsLoading(false);
+      navigateTo('/dashboard');
+      window.location.reload();
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
       const status = get(err, 'response.status', null);
@@ -120,7 +122,7 @@ function EditStudentComponent() {
       await axios.delete(`/alunos/${id}`);
       toast.success('Aluno Apagado!');
       setIsLoading(false);
-      navigateTo('/students');
+      navigateTo('/dashboard');
     } catch (err) {
       const errors = get(err, 'response.data.errors', []);
       errors.map((error) => toast.error(error));
@@ -136,7 +138,7 @@ function EditStudentComponent() {
   }
 
   return (
-    <div className="flex flex-row gap-8">
+    <div className="flex flex-col 2xl:flex-row gap-8">
       {/* MODAL */}
       <div // Modal
         className={
@@ -170,9 +172,12 @@ function EditStudentComponent() {
         </div>
       </div>
       {/* MODAL */}
-      <div className="flex flex-col w-96">
+      <h1 className="text-2xl md:text-2xl font-bold text-center 2xl:hidden">
+        Edite o Cadastro
+      </h1>
+      <div className="flex flex-col w-full 2xl:w-96 order-2 2xl:order-none">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-xl md:text-2xl font-bold pb-9">
+          <h1 className="hidden 2xl:block  text-xl md:text-2xl font-bold pb-9">
             Edite o Cadastro
           </h1>
           <label htmlFor="name" className="text-lg font-semibold">
@@ -247,14 +252,14 @@ function EditStudentComponent() {
         </form>
       </div>
       <div>
-        <div className="flex flex-col items-center p-5 w-full">
+        <div className="flex flex-col items-center 2xl:p-5 w-full order-1 2xl:order-none">
           {image ? (
             <div
-              className="rounded-full w-96 h-96 bg-[url('/src/img/avatar.jpg')] bg-cover bg-center"
+              className="rounded-full w-64 h-64 2xl:w-96 2xl:h-96 bg-cover bg-center"
               style={{ backgroundImage: `url(${image})` }}
             />
           ) : (
-            <div className="rounded-full w-96 h-96 bg-zinc-300 flex items-center justify-center">
+            <div className="rounded-full w-64 h-64 bg-zinc-300 flex items-center justify-center">
               <div>
                 <Images size={100} className="pt-2 m-0 text-zinc-400" />
               </div>
@@ -262,7 +267,7 @@ function EditStudentComponent() {
           )}
 
           <div className='flex items-center justify-center w-9 h-9 mt-[-18px] bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 bottom-28 hover:scale-110 transition ease-in-out duration-150"'>
-            <Link to="/dashboard">
+            <Link to={`/dashboard/images0/${id}`}>
               <FileImage size={24} className="text-white" />
             </Link>
           </div>
@@ -271,7 +276,7 @@ function EditStudentComponent() {
               setIsModal(true);
             }}
             type="button"
-            className="absolute bg-red-500 rounded-full p-2 bottom-7 right-7 hover:scale-125 hover:bg-red-400 transition ease-in-out duration-150"
+            className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 right-7 hover:scale-125 hover:bg-red-400 transition ease-in-out duration-150"
           >
             <Eraser size={44} className="text-white" />
           </button>
