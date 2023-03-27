@@ -7,7 +7,6 @@ import SideBar from '../components/dashboard/SideBar';
 
 function Dashboard() {
   const isNavigating = useOutlet();
-  const IsNavigate = isNavigating === null;
   return (
     <div className="flex items-center justify-center w 2xl:h-screen bg-zinc-200">
       {/* SIDEBAR */}
@@ -19,7 +18,7 @@ function Dashboard() {
           <HeaderDashboard />
           <div className="flex w-full h-full">
             {/* STUDENTS LIST */}
-            <div className="w-full h-full 2xl:w-[35%] bg-white p-4 2xl:p-9 border">
+            <div className="w-full min-h-screen 2xl:min-h-0 2xl:h-full 2xl:w-[35%] bg-white p-4 2xl:p-9 border">
               <ListStudents />
             </div>
             {/* EDIT STUDENTS / CREATE STUDENTS */}
@@ -36,7 +35,7 @@ function Dashboard() {
             </div>
 
             <div
-              className={`absolute w-full h-max bg-white p-9  flex 2xl:hidden ${
+              className={`absolute w-full min-h-screen h-max bg-white p-9 flex items-center 2xl:hidden ${
                 isNavigating === null ? '2xl:hidden hidden' : 'flex 2xl:hidden'
               }`}
             >
