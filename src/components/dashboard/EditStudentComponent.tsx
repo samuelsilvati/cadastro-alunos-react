@@ -188,16 +188,16 @@ function EditStudentComponent() {
                   </div>
                 </div>
               )}
-              <button
-                onClick={() => {
-                  setIsModal(true);
-                }}
-                type="button"
-                className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 2xl:top-auto top-10 right-7 hover:scale-110 hover:bg-red-400 transition ease-in-out duration-150"
-              >
-                <Eraser size={30} className="text-white" />
-              </button>
             </Link>
+            <button
+              onClick={() => {
+                setIsModal(true);
+              }}
+              type="button"
+              className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 2xl:top-auto top-10 right-7 hover:scale-110 hover:bg-red-400 transition ease-in-out duration-150"
+            >
+              <Eraser size={30} className="text-white" />
+            </button>
           </div>
         </div>
         <form onSubmit={handleSubmit}>
