@@ -12,15 +12,16 @@ import PrivateRoute from './routes/PrivateRoute';
 import EditStudent from './pages/EditStudent';
 import NewStudent from './pages/NewStudent';
 import Images from './pages/Images';
-import HomePage from './pages/Home copy';
+import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard';
 import EditStudentComponent from './components/dashboard/EditStudentComponent';
 import NewStudentComponent from './components/dashboard/NewStudentComponent';
+import ImagesComponent from './components/dashboard/ImagesComponent';
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
       <Route
         path="/login"
         element={
@@ -40,6 +41,7 @@ export function App() {
       <Route path="/dashboard" element={<Dashboard />}>
         <Route path="/dashboard/newstudent" element={<NewStudentComponent />} />
         <Route path="/dashboard/:id/edit" element={<EditStudentComponent />} />
+        <Route path="/dashboard/images0/:id/" element={<ImagesComponent />} />
       </Route>
       <Route path="/images/:id/" element={<Images />} />
       <Route path="/logscreen" element={<HomePage />} />
