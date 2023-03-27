@@ -34,8 +34,19 @@ function ListStudents() {
   if (isLoading) {
     return <LoadingComponent isLoading={isLoading} />;
   }
+  if (!students) {
+    return (
+      <div>
+        <p className="text-lg font-semibold">Não existem registos ainda!</p>
+        <p className="text-lg font-semibold">
+          Clique no Botão Adicionar acima para iniciar um cadastro!
+        </p>
+      </div>
+    );
+  }
   return (
-    <div className="overflow-y-auto h-[750px]">
+    <div className="2xl:overflow-auto h-max 2xl:h-[780px]">
+      <LoadingComponent isLoading={isLoading} />
       <div className="border-b-2 border-zinc-100 pb-4 pl-5 text-lg font-semibold">
         <p>Nome</p>
       </div>
