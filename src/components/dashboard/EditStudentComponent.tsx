@@ -138,7 +138,7 @@ function EditStudentComponent() {
   }
 
   return (
-    <div className="flex flex-col 2xl:flex-row gap-8">
+    <div className="flex flex-col items-center gap-2">
       {/* MODAL */}
       <div // Modal
         className={
@@ -172,115 +172,102 @@ function EditStudentComponent() {
         </div>
       </div>
       {/* MODAL */}
-      <h1 className="text-2xl md:text-2xl font-bold text-center 2xl:hidden">
-        Edite o Cadastro
-      </h1>
       <div className="flex flex-col w-full 2xl:w-96 order-2 2xl:order-none">
+        <div>
+          <div className="flex flex-col items-center 2xl:p-5 w-full order-1 2xl:order-none">
+            <Link to={`/dashboard/images0/${id}`}>
+              {image ? (
+                <div
+                  className="rounded-full w-24 h-24 2xl:w-32 2xl:h-32 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${image})` }}
+                />
+              ) : (
+                <div className="rounded-full w-24 h-24 2xl:w-32 2xl:h-32 bg-zinc-300 flex items-center justify-center">
+                  <div>
+                    <Images size={50} className="pt-2 m-0 text-zinc-400" />
+                  </div>
+                </div>
+              )}
+              <button
+                onClick={() => {
+                  setIsModal(true);
+                }}
+                type="button"
+                className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 2xl:top-auto top-10 right-7 hover:scale-110 hover:bg-red-400 transition ease-in-out duration-150"
+              >
+                <Eraser size={30} className="text-white" />
+              </button>
+            </Link>
+          </div>
+        </div>
         <form onSubmit={handleSubmit}>
-          <h1 className="hidden 2xl:block  text-xl md:text-2xl font-bold pb-9">
+          <h1 className=" text-3xl text-center font-bold py-2">
             Edite o Cadastro
           </h1>
-          <label htmlFor="name" className="text-lg font-semibold">
-            Nome
-          </label>
           <input
             type="text"
             id="name"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-4 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            placeholder="Nome"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="lastName" className="text-lg font-semibold">
-            Sobrenome
-          </label>
           <input
             type="text"
             id="lastName"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-4 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            placeholder="Sobrenome"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-          <label htmlFor="mail" className="text-lg font-semibold">
-            E-mail
-          </label>
           <input
             type="mail"
             id="mail"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-4 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            placeholder="E-mail"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
               setIsEnable(isEmail(e.target.value)); // Habilita o botão apenas quando a senha for maior que 5 caracteres
             }}
           />
-          <label htmlFor="age" className="text-lg font-semibold">
+          <label htmlFor="age" className="text-m font-semibold">
             Idade
           </label>
           <input
             type="number"
             id="age"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-4 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-          <label htmlFor="weight" className="text-lg font-semibold">
+          <label htmlFor="weight" className="text-m font-semibold">
             Peso
           </label>
           <input
             type="number"
             id="weight"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-4 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
           />
-          <label htmlFor="height" className="text-lg font-semibold">
+          <label htmlFor="height" className="text-m font-semibold">
             Altura
           </label>
           <input
             type="number"
             id="height"
-            className="text-xl font-medium text-indigo-700 h-11 w-full pl-2 mb-10 border-b-2  border-b-zinc-100 focus:border-b-2 focus:border-b-indigo-600 hover:border-b-2 hover:border-b-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
           />
           <button
             type="submit"
-            className="rounded-lg h-11 w-full text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400"
+            className="rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400"
           >
             Salvar
           </button>
         </form>
-      </div>
-      <div>
-        <div className="flex flex-col items-center 2xl:p-5 w-full order-1 2xl:order-none">
-          {image ? (
-            <div
-              className="rounded-full w-64 h-64 2xl:w-96 2xl:h-96 bg-cover bg-center"
-              style={{ backgroundImage: `url(${image})` }}
-            />
-          ) : (
-            <div className="rounded-full w-64 h-64 bg-zinc-300 flex items-center justify-center">
-              <div>
-                <Images size={100} className="pt-2 m-0 text-zinc-400" />
-              </div>
-            </div>
-          )}
-
-          <div className='flex items-center justify-center w-9 h-9 mt-[-18px] bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 bottom-28 hover:scale-110 transition ease-in-out duration-150"'>
-            <Link to={`/dashboard/images0/${id}`}>
-              <FileImage size={24} className="text-white" />
-            </Link>
-          </div>
-          <button
-            onClick={() => {
-              setIsModal(true);
-            }}
-            type="button"
-            className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 right-7 hover:scale-125 hover:bg-red-400 transition ease-in-out duration-150"
-          >
-            <Eraser size={44} className="text-white" />
-          </button>
-        </div>
       </div>
     </div>
   );
