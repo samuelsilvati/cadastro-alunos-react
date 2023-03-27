@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 
-import { FileImage } from '@phosphor-icons/react';
+import { FileImage, Images } from '@phosphor-icons/react';
 import { get } from 'lodash';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -164,7 +164,11 @@ function NewStudentComponent() {
       </div>
       <div>
         <div className="flex flex-col items-center 2xl:p-5 w-full order-1 2xl:order-none">
-          <div className="rounded-full w-64 h-64 2xl:w-96 2xl:h-96 bg-[url('/src/img/avatar.jpg')] bg-cover" />
+          <div className="rounded-full w-64 h-64 bg-zinc-300 flex items-center justify-center">
+            <div>
+              <Images size={100} className="pt-2 m-0 text-zinc-400" />
+            </div>
+          </div>
           <div className='flex items-center justify-center w-9 h-9 mt-[-18px] bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 bottom-28 hover:scale-110 transition ease-in-out duration-150"'>
             <Link to="/dashboard">
               <FileImage size={24} className="text-white" />
