@@ -64,7 +64,6 @@ export function App() {
 export function WrappedApp() {
   return (
     <BrowserRouter>
-      <Header />
       <App />
       <ToastContainer position="top-center" />
     </BrowserRouter>
