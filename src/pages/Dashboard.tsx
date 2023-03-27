@@ -8,7 +8,7 @@ import SideBar from '../components/dashboard/SideBar';
 function Dashboard() {
   const isNavigating = useOutlet();
   return (
-    <div className="flex items-center justify-center w 2xl:h-screen bg-zinc-200">
+    <div className="flex items-center justify-center w 2xl:h-screen bg-zinc-200 overflow-auto 2xl:overflow-hidden">
       {/* SIDEBAR */}
       <div className="h-full w-[20%] hidden 2xl:flex flex-col p-9 bg-cover bg-white border-r">
         <SideBar />
@@ -18,11 +18,11 @@ function Dashboard() {
           <HeaderDashboard />
           <div className="flex w-full h-full">
             {/* STUDENTS LIST */}
-            <div className="w-full min-h-screen 2xl:min-h-0 2xl:h-full 2xl:w-[35%] bg-white p-4 2xl:p-9 border">
+            <div className="w-full min-h-screen 2xl:min-h-0 2xl:h-full 2xl:w-[40%] bg-white p-4 2xl:p-9 border">
               <ListStudents />
             </div>
             {/* EDIT STUDENTS / CREATE STUDENTS */}
-            <div className="w-full 2xl:w-[65%] bg-white border p-12 hidden 2xl:flex">
+            <div className="w-full 2xl:w-[60%] bg-white border p-12 hidden 2xl:flex">
               {isNavigating === null && (
                 <div>
                   <p className="w-[360px] text-4xl font-bold text-black">
@@ -35,7 +35,7 @@ function Dashboard() {
             </div>
 
             <div
-              className={`absolute w-full min-h-screen h-max bg-white p-9 flex items-center 2xl:hidden ${
+              className={`absolute w-full min-h-screen h-max bg-white px-9 pt-4 flex 2xl:hidden ${
                 isNavigating === null ? '2xl:hidden hidden' : 'flex 2xl:hidden'
               }`}
             >
