@@ -47,14 +47,14 @@ function ListStudents() {
   return (
     <div className="2xl:overflow-auto h-max 2xl:h-[780px]">
       <LoadingComponent isLoading={isLoading} />
-      <div className="border-b-2 border-zinc-100 pb-4 pl-5 text-lg font-semibold">
+      <div className="border-b-2 border-zinc-200 dark:border-slate-600 pb-4 pl-5 dark:text-slate-300 text-lg font-semibold">
         <p>Nome</p>
       </div>
       {students.map((student) => (
         <Link to={`/dashboard/${student.id}/edit`} key={student.id}>
           <div
             key={student.id}
-            className="flex items-center gap-3 my-4 py-2 pl-5 border-b-2 border-zinc-100 hover:rounded-lg hover:bg-zinc-100 transition ease-in-out duration-400"
+            className="flex items-center gap-3 my-4 py-2 pl-5 border-b-2 border-zinc-200 dark:border-slate-600 hover:rounded-lg hover:bg-zinc-100 dark:hover:bg-slate-600"
           >
             {get(student, 'Images[0].url', false) ? (
               <div
@@ -69,10 +69,12 @@ function ListStudents() {
               </div>
             )}
             <div>
-              <p className="text-lg font-semibold">
+              <p className="dark:text-slate-300 text-lg font-semibold">
                 {student.nome} {student.sobrenome}
               </p>
-              <p className="text-sm font-semibold">{student.email}</p>
+              <p className="dark:text-slate-300 text-sm font-semibold">
+                {student.email}
+              </p>
             </div>
           </div>
         </Link>

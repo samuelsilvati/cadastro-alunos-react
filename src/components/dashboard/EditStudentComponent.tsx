@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import { Eraser, FileImage, Images } from '@phosphor-icons/react';
+import { Eraser, Images } from '@phosphor-icons/react';
 import { get } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -138,12 +138,12 @@ function EditStudentComponent() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center">
       {/* MODAL */}
       <div // Modal
         className={
           isModal
-            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-slate-700 bg-opacity-40 backdrop-blur-sm transition ease-in-out duration-500'
+            ? 'fixed flex items-center justify-center inset-0 w-full h-full z-40 bg-slate-700 bg-opacity-40 backdrop-blur-sm'
             : 'hidden'
         }
       >
@@ -155,7 +155,7 @@ function EditStudentComponent() {
             <button
               onClick={handleDelete}
               type="button"
-              className="h-9 w-24 mr-3 text-lg text-white font-bold bg-red-400 rounded hover:bg-red-500 transition ease-in-out duration-150"
+              className="h-9 w-24 mr-3 text-lg text-white font-bold bg-red-400 rounded hover:bg-red-500"
             >
               Sim
             </button>
@@ -164,7 +164,7 @@ function EditStudentComponent() {
                 setIsModal(false);
               }}
               type="button"
-              className="h-9 w-24 text-lg text-white font-bold bg-indigo-600 rounded hover:bg-indigo-500 transition ease-in-out duration-150"
+              className="h-9 w-24 text-lg text-white font-bold bg-indigo-600 rounded hover:bg-indigo-500"
             >
               Não
             </button>
@@ -194,21 +194,21 @@ function EditStudentComponent() {
                 setIsModal(true);
               }}
               type="button"
-              className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 2xl:top-auto top-10 right-7 hover:scale-110 hover:bg-red-400 transition ease-in-out duration-150"
+              className="absolute bg-red-500 rounded-full p-2 2xl:bottom-7 2xl:top-auto top-10 right-7 hover:scale-110 hover:bg-red-400"
             >
               <Eraser size={30} className="text-white" />
             </button>
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <h1 className=" text-3xl text-center font-bold py-2">
+          <h1 className="dark:text-slate-300 text-3xl text-center font-bold py-2">
             Edite o Cadastro
           </h1>
           <input
             type="text"
             id="name"
             placeholder="Nome"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 focus:dark:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0 "
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -216,7 +216,7 @@ function EditStudentComponent() {
             type="text"
             id="lastName"
             placeholder="Sobrenome"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 focus:dark:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0 "
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -224,46 +224,55 @@ function EditStudentComponent() {
             type="mail"
             id="mail"
             placeholder="E-mail"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 focus:dark:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
               setIsEnable(isEmail(e.target.value)); // Habilita o botão apenas quando a senha for maior que 5 caracteres
             }}
           />
-          <label htmlFor="age" className="text-m font-semibold">
+          <label
+            htmlFor="age"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Idade
           </label>
           <input
             type="number"
             id="age"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 focus:dark:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-          <label htmlFor="weight" className="text-m font-semibold">
+          <label
+            htmlFor="weight"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Peso
           </label>
           <input
             type="number"
             id="weight"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 dark:focus:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
           />
-          <label htmlFor="height" className="text-m font-semibold">
+          <label
+            htmlFor="height"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Altura
           </label>
           <input
             type="number"
             id="height"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 focus:dark:border-slate-100 hover:border-2 hover:border-indigo-600 outline-0"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
           />
           <button
             type="submit"
-            className="rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400"
+            className="rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500"
           >
             Salvar
           </button>

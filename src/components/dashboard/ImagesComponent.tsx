@@ -72,7 +72,7 @@ function ImagesComponent() {
   if (isLoading) return <LoadingComponent isLoading={isLoading} />;
   return (
     <div className="m-auto flex flex-col items-center w-full h-full">
-      <div className="w-96 h-max p-2 rounded bg-white flex flex-col items-center justify-center">
+      <div className="w-96 h-max p-2 rounded bg-white flex flex-col items-center">
         <p className="p-4 text-xl text-center font-semibold">
           Selecionar Imagem
         </p>

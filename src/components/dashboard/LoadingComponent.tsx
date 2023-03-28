@@ -8,7 +8,7 @@ function LoadingComponent({ isLoading = false }: Props) {
       <div className="flex items-center justify-center w-full h-full">
         <div>
           <svg
-            className="animate-spin h-9 w-9 text-indigo-600 relative"
+            className="animate-spin h-9 w-9 text-indigo-600 dark:text-indigo-300 relative"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

@@ -21,7 +21,7 @@ function Header() {
 
   if (isLoggedIn)
     return (
-      <header className="fixed flex items-center justify-center w-full bg-zinc-400 z-50 border-b border-zinc-400">
+      <header className="fixed hidden items-center justify-center w-full bg-zinc-400 z-50 border-b border-zinc-400">
         <Loading isLoading={isLoading} />
         <div className="max-w-6xl pl-4 pr-4 grow flex items-center justify-between">
           <a

@@ -77,7 +77,7 @@ function NewStudentComponent() {
     return <LoadingComponent isLoading={isLoading} />;
   }
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center">
       <div>
         <div className="flex flex-col items-center 2xl:p-5 w-full">
           <Link to="/dashboard">
@@ -91,14 +91,14 @@ function NewStudentComponent() {
       </div>
       <div className="flex flex-col w-full 2xl:w-96">
         <form onSubmit={handleSubmit}>
-          <h1 className=" text-3xl text-center font-bold py-2">
+          <h1 className="dark:text-slate-300 text-3xl text-center font-bold py-2">
             Criar Cadastro
           </h1>
           <input
             type="text"
             id="name"
             placeholder="Nome"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -106,7 +106,7 @@ function NewStudentComponent() {
             type="text"
             id="lastName"
             placeholder="Sobrenome"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -114,7 +114,7 @@ function NewStudentComponent() {
             type="mail"
             id="mail"
             placeholder="E-mail"
-            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 mb-5 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -122,35 +122,44 @@ function NewStudentComponent() {
             }}
           />
 
-          <label htmlFor="age" className="text-m font-semibold">
+          <label
+            htmlFor="age"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Idade
           </label>
           <input
             type="number"
             id="age"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
 
-          <label htmlFor="weight" className="text-m font-semibold">
+          <label
+            htmlFor="weight"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Peso
           </label>
           <input
             type="number"
             id="weight"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
           />
 
-          <label htmlFor="height" className="text-m font-semibold">
+          <label
+            htmlFor="height"
+            className="dark:text-slate-300 text-m font-semibold"
+          >
             Altura
           </label>
           <input
             type="number"
             id="height"
-            className="h-10 w-full pl-2 rounded-lg text-m font-medium text-indigo-700 bg-zinc-100  border-2 border-zinc-200 focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0 transition ease-in-out duration-400"
+            className="h-10 w-full pl-2 rounded-lg text-m font-medium dark:text-slate-300 bg-zinc-200 dark:bg-slate-600 border-2 border-zinc-200 dark:border-slate-600  focus:border-2 focus:border-indigo-600 hover:border-2 hover:border-indigo-600 outline-0"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
           />
@@ -159,7 +168,7 @@ function NewStudentComponent() {
             type="submit"
             className={
               isEnable
-                ? 'rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500 transition ease-in-out duration-400'
+                ? 'rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-600 hover:bg-indigo-500'
                 : 'rounded-lg h-11 w-full mt-7 text-lg text-white font-bold bg-indigo-400'
             }
             disabled={!isEnable}
