@@ -73,7 +73,7 @@ function LoginPage() {
             </span>
           </div>
         </div>
-        <div className="h-full w-[65%] flex items-center justify-center">
+        <div className="h-full w-4/5 2xl:w-[65%] flex items-center justify-center">
           <div className="flex flex-col w-96">
             <form onSubmit={handleLogin}>
               <Barbell size={38} className="font-bold" />
@@ -105,13 +105,13 @@ function LoginPage() {
               />
               <div className="flex justify-between mr-2 mb-2 ml-2">
                 <Link
-                  to="/login"
+                  to="/logscreen"
                   className=" block w-max text-neutral-500 text-sm md:text-lg font-semibold hover:text-neutral-600 transition ease-in-out duration-400"
                 >
                   Esqueceu a senha?
                 </Link>
                 <Link
-                  to="/login"
+                  to="/signin"
                   className=" block w-max mr-2 text-sm md:text-lg font-semibold hover:text-slate-700 transition ease-in-out duration-400"
                 >
                   Precisa de uma conta?
