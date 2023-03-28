@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import EditStudentComponent from './components/dashboard/EditStudentComponent';
 import NewStudentComponent from './components/dashboard/NewStudentComponent';
 import ImagesComponent from './components/dashboard/ImagesComponent';
+import ThemeContextProvider from './hooks/useTheme';
 
 export function App() {
   return (
@@ -63,8 +64,10 @@ export function App() {
 export function WrappedApp() {
   return (
     <BrowserRouter>
-      <App />
-      <ToastContainer position="top-center" />
+      <ThemeContextProvider>
+        <App />
+        <ToastContainer position="top-center" />
+      </ThemeContextProvider>
     </BrowserRouter>
   );
 }
