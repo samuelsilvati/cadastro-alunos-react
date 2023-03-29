@@ -31,7 +31,7 @@ function Home() {
           <div className="flex items-center justify-start">
             <div className="flex flex-col md:flex-row items-center xl:justify-start justify-center">
               <div>
-                <h1 className="w-80 pb-9 text-5xl font-bold text-slate-50">
+                <h1 className="w-80 pb-9 text-4xl md:text-5xl font-bold text-slate-50">
                   Gerencie seus Alunos em um só lugar
                 </h1>
                 <p className="w-80 pb-9 text-xl font-semibold text-slate-50">
