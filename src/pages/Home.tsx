@@ -5,7 +5,7 @@ import dashboard from '../img/dashboard.webp';
 function Home() {
   return (
     <div className=" w-screen h-screen flex items-center justify-center bg-[url('/src/img/photo-1549060279-7e168fcee0c2.webp')] bg-cover">
-      <div className="absolute inset-0 bg-black bg-opacity-80" />
+      <div className="absolute inset-0 bg-black bg-opacity-80 h-screen" />
       <div className="container h-full mx-auto px-9 z-10">
         <header className="w-full p-6 flex items-center justify-between">
           <div className="flex itens-center gap-2 text-xl text-white font-bold">
