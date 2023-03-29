@@ -18,6 +18,7 @@ import NewStudentComponent from './components/dashboard/NewStudentComponent';
 import ImagesComponent from './components/dashboard/ImagesComponent';
 import ThemeContextProvider from './hooks/useTheme';
 import SignIn from './pages/SignIn';
+import AccountPage from './pages/AccountPage';
 
 export function App() {
   return (
@@ -57,6 +58,7 @@ export function App() {
       <Route path="/student/:id/edit" element={<EditStudent />} />
       <Route path="/student/new" element={<NewStudent />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/accountpage" element={<AccountPage />} />
       <Route path="/account" element={<Account />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
