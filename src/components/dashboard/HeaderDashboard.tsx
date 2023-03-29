@@ -80,7 +80,7 @@ function HeaderDashboard() {
                   </li>
                   <li className="py-4 pl-3 my-1 rounded-lg hover:bg-zinc-100 dark:hover:bg-slate-600">
                     <Link
-                      to="/dashboard"
+                      to="/accountpage"
                       onClick={() => {
                         setMenuOpen(false);
                       }}

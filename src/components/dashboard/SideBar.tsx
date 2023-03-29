@@ -42,7 +42,7 @@ function SideBar() {
               </Link>
             </li>
             <li className="py-4 pl-3 my-1 rounded-lg hover:bg-zinc-100 dark:hover:bg-slate-600">
-              <Link to="/dashboard">
+              <Link to="/accountpage">
                 <div className="flex items-center gap-2 text-xl dark:text-slate-300">
                   <User size={24} /> Conta
                 </div>
