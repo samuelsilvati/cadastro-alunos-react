@@ -7,6 +7,11 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
       },
+      container: {
+        screens: {
+          '2xl': '1240px',
+        },
+      },
     },
   },
   plugins: [],
