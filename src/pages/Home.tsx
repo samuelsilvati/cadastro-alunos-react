@@ -1,5 +1,6 @@
 import { Barbell } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
+import dashboard from '../img/dashboard.webp';
 
 function Home() {
   return (
@@ -44,7 +45,7 @@ function Home() {
                 </Link>
               </div>
               <div className="xl:ml-56">
-                <img src="src/img/dashboard.webp" alt="dashboard.img" />
+                <img src={dashboard} alt="dashboard.img" />
               </div>
             </div>
           </div>
