@@ -44,7 +44,7 @@ function Home() {
                 </Link>
               </div>
               <div className="xl:ml-56">
-                <img src="./src/img/dashboard.webp" alt="" />
+                <img src="/src/img/dashboard.webp" alt="" />
               </div>
             </div>
           </div>
