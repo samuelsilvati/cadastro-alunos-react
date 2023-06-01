@@ -10,6 +10,7 @@ import isEmail from 'validator/lib/isEmail';
 import { loginFailure } from '../../redux/auth/slice';
 import axios from '../../services/axios';
 import LoadingComponent from './LoadingComponent';
+import ImagesComponent from './ImagesComponent';
 
 interface Params {
   [key: string]: string | undefined;
@@ -173,9 +174,13 @@ function EditStudentComponent() {
       </div>
       {/* MODAL */}
       <div className="flex flex-col w-full 2xl:w-96 order-2 2xl:order-none">
+        <h1 className="dark:text-slate-300 text-3xl text-center font-bold py-2">
+          Edite o Cadastro
+        </h1>
         <div>
           <div className="flex flex-col items-center 2xl:p-5 w-full order-1 2xl:order-none">
-            <Link to={`/dashboard/images0/${id}`}>
+            <ImagesComponent />
+            {/* <Link to={`/dashboard/images0/${id}`}>
               {image ? (
                 <div
                   className="rounded-full w-24 h-24 2xl:w-32 2xl:h-32 bg-cover bg-center"
@@ -188,7 +193,7 @@ function EditStudentComponent() {
                   </div>
                 </div>
               )}
-            </Link>
+            </Link> */}
             <button
               onClick={() => {
                 setIsModal(true);
@@ -201,9 +206,6 @@ function EditStudentComponent() {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <h1 className="dark:text-slate-300 text-3xl text-center font-bold py-2">
-            Edite o Cadastro
-          </h1>
           <input
             type="text"
             id="name"

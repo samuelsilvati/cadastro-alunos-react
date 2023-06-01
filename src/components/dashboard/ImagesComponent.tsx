@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import api from 'axios';
 import { loginFailure } from '../../redux/auth/slice';
 import axios from '../../services/axios';
 import LoadingComponent from './LoadingComponent';
-// import Loading from '../components/Loading';
 
 interface Params {
   [key: string]: string | undefined;
@@ -14,16 +14,11 @@ interface Params {
 }
 
 function ImagesComponent() {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [image, setImage] = useState('');
   const { id } = useParams<Params>();
-  const navigateTo = useNavigate();
   const dispatch = useDispatch();
 
-  function handleVoltarClick() {
-    navigate(-1); // Navega para a página anterior
-  }
   useEffect(() => {
     const getData = async () => {
       try {
@@ -34,29 +29,42 @@ function ImagesComponent() {
       } catch {
         toast.error('Erro ao adicionar imagem!');
         setIsLoading(false);
-
-        navigateTo('/students');
       }
     };
     getData();
-  }, [id, navigateTo]);
+  }, [id]);
 
   const handleChange = async (e: any) => {
     const newImage = e.target.files?.[0];
-    const imageURL = URL.createObjectURL(newImage);
-    setImage(imageURL);
 
     if (id) {
       const formData = new FormData();
-      formData.append('aluno_id', id);
-      formData.append('file', newImage);
+
+      formData.set('file', newImage);
+      formData.set('fileName', 'filename.jpg');
+      formData.set('folder', 'cadastro-alunos');
 
       try {
         setIsLoading(true);
-        await axios.post('/images/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+        const uploadResponse = await api.post(
+          `${import.meta.env.VITE_APP_IMAGEKIT_UPLOAD_URL}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Basic ${import.meta.env.VITE_APP_IMAGEKIT_KEY} `,
+            },
+          }
+        );
+        const imageUrl = uploadResponse.data.url;
+        setImage(imageUrl);
+
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const aluno_id = id;
+        const url = imageUrl;
+
+        await axios.post('/images/', {
+          aluno_id,
+          url,
         });
 
         toast.success('Imagem enviada!');
@@ -69,25 +77,32 @@ function ImagesComponent() {
       }
     }
   };
-  if (isLoading) return <LoadingComponent isLoading={isLoading} />;
+  if (isLoading)
+    return (
+      <div
+        className="rounded-full w-52 h-52 bg-cover bg-center hover:filter hover:grayscale hover:blur-sm  transition ease-in-out duration-150"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <LoadingComponent isLoading={isLoading} />
+      </div>
+    );
   return (
     <div className="m-auto flex flex-col items-center w-full h-full">
-      <div className="w-96 h-max p-2 rounded bg-white flex flex-col items-center">
-        <p className="p-4 text-xl text-center font-semibold">
-          Selecionar Imagem
-        </p>
+      <div>
         <form className="flex items-center justify-center w-full">
           <label
             htmlFor="image"
-            className="rounded-full w-60 h-60 border-2 border-indigo-600 bg-zinc-300 cursor-pointer hover:bg-zinc-400 flex items-center justify-center transition ease-in-out duration-150 overflow-hidden"
+            className="rounded-full w-52 h-52 border-2 border-indigo-600 bg-zinc-300 cursor-pointer hover:bg-zinc-400 flex items-center justify-center transition ease-in-out duration-150 overflow-hidden"
           >
             {image ? (
               <div
-                className="rounded-full w-60 h-60 2xl:w-96 2xl:h-96 bg-cover bg-center hover:filter hover:grayscale hover:blur-sm  transition ease-in-out duration-150"
+                className="rounded-full w-52 h-52  bg-cover bg-center hover:filter hover:grayscale hover:blur-sm  transition ease-in-out duration-150"
                 style={{ backgroundImage: `url(${image})` }}
               />
             ) : (
-              <span className="font-medium">Selecionar</span>
+              <span className="font-medium text-gray-500">
+                Fazer Upload de Imagem
+              </span>
             )}
             <input
               type="file"
@@ -97,13 +112,6 @@ function ImagesComponent() {
             />
           </label>
         </form>
-        <button
-          type="button"
-          onClick={handleVoltarClick}
-          className="h-9 w-24 mt-5 text-white text-xs font-semibold bg-indigo-600 rounded hover:bg-indigo-400 transition ease-in-out duration-150"
-        >
-          Voltar
-        </button>
       </div>
     </div>
   );
